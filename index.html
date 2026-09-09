@@ -115,7 +115,7 @@
       <div class="role">Data Scientist — Football Analytics</div>
       <p>I build and validate models that combine event, tracking and video data to explain and forecast what happens on the pitch: phase-of-play detection, line-breaking passes, ball tracking from broadcast footage, player identification. Machine Learning Engineer at Driblab since 2023.</p>
       <div class="links">
-        <a class="primary" href="Seif-Eddine-MEJRI-Resume.pdf" target="_blank">Download CV (PDF)</a>
+        <a class="primary" href="assets/uptodate-Seif-Eddine-MEJRI-Resume.pdf" target="_blank">Download CV (PDF)</a>
         <a href="https://github.com/SeifMejri21" target="_blank">GitHub</a>
         <a href="https://www.linkedin.com/in/seif-eddine-mejri-5436b5195/" target="_blank">LinkedIn</a>
         <a href="mailto:mejriseifeddine21@gmail.com" target="_blank">Email</a>
@@ -173,18 +173,18 @@
         <figcaption>Match segmented into possession and transition phases.</figcaption>
       </figure>
     </article>
-
+    
     <article class="project">
       <div>
-        <h3>Ball detection in broadcast video</h3>
-        <div class="meta">Computer vision · YOLOv8</div>
-        <p>Fine-tuned YOLOv8 for ball detection with grid-based patch inference, so the small ball is detected at usable resolution instead of being lost in the full frame. Precision improved by 30% over the baseline.</p>
-        <ul class="tags"><li>YOLOv8</li><li>Patch inference</li><li>PyTorch</li></ul>
+        <h3>Ball detection and 3D trajectory estimation</h3>
+        <div class="meta">Computer vision + sequence modeling · YOLOv8, PyTorch</div>
+        <p>A two-stage pipeline for tracking the ball from broadcast video. First, YOLOv8 fine-tuned for ball detection with grid-based patch inference, so the small ball is detected at usable resolution instead of being lost in the full frame — precision improved by 30% over the baseline. Second, a GRU-based trajectory model that takes the fragmented sequence of homography-projected 2D detections, fills tracking gaps where the ball is occluded or missed, and estimates its 3D coordinates over time.</p>
+        <ul class="tags"><li>YOLOv8</li><li>Patch inference</li><li>GRU</li><li>Homography</li><li>PyTorch</li></ul>
       </div>
       <figure>
-        <img src="assets/3d_ball.gif" alt="Ball detections drawn on a broadcast frame" onerror="this.parentNode.classList.add('no-img')">
+        <img src="assets/3d_ball.gif" alt="Ball detections and estimated 3D trajectory over a broadcast clip" onerror="this.parentNode.classList.add('no-img')">
         <div class="missing">Add assets/3d_ball.gif</div>
-        <figcaption>Ball detection with grid-based patch inference.</figcaption>
+        <figcaption>Detections (left) and the gap-filled 3D trajectory (right).</figcaption>
       </figure>
     </article>
 
