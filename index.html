@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seif Eddine Mejri — Data Scientist, Football Analytics</title>
+<meta name="description" content="Data scientist building tracking, event and computer-vision models for football. Machine Learning Engineer at Driblab.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f6f3; --ink:#15201a; --ink-soft:#4a574f; --line:#d3dad4;
+    --pitch:#1f5c3a; --pitch-deep:#153f28; --chalk:#ffffff; --accent:#c8532a; --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Bricolage Grotesque","Inter",sans-serif;line-height:1.1;margin:0;letter-spacing:-0.015em}
+  a{color:var(--pitch);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  a:hover{color:var(--pitch-deep)}
+  a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  nav{position:sticky;top:0;background:rgba(244,246,243,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:5}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+  nav .brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;text-decoration:none;color:var(--ink);font-size:1.05rem}
+  nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0}
+  nav li a{text-decoration:none;color:var(--ink-soft);font-size:.95rem;font-weight:500}
+  nav li a:hover{color:var(--ink)}
+  @media (max-width:600px){nav ul{gap:12px} nav li a{font-size:.82rem}}
+
+  .hero{padding:64px 0 56px;border-bottom:1px solid var(--line)}
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(220px,.7fr);gap:56px;align-items:center}
+  .hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700}
+  .hero .role{font-size:1.25rem;color:var(--pitch);font-weight:600;margin:14px 0 18px;font-family:"Bricolage Grotesque",sans-serif}
+  .hero p{max-width:56ch;color:var(--ink-soft);margin:0 0 26px}
+  .links{display:flex;flex-wrap:wrap;gap:10px}
+  .links a{display:inline-block;padding:10px 16px;border:1.5px solid var(--pitch);border-radius:999px;text-decoration:none;font-weight:500;font-size:.95rem;color:var(--pitch)}
+  .links a.primary{background:var(--pitch);color:var(--chalk)}
+  .links a.primary:hover{background:var(--pitch-deep)}
+  .links a:hover{background:#e6ede8}
+  .portrait{position:relative;max-width:340px;justify-self:end}
+  .portrait img{display:block;width:100%;height:auto;border-radius:8px;aspect-ratio:4/5;object-fit:cover}
+  /* pitch line detail under the photo, echoing the homography work */
+  .portrait::after{content:"";position:absolute;inset:auto -14px -14px auto;width:64%;height:64%;border:2px solid var(--pitch);border-radius:8px;z-index:-1}
+  @media (max-width:820px){
+    .hero .wrap{grid-template-columns:1fr;gap:36px}
+    .portrait{justify-self:start;max-width:260px}
+  }
+
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.7rem,3.2vw,2.3rem);font-weight:700;margin-bottom:8px}
+  .lede{color:var(--ink-soft);max-width:62ch;margin:0 0 36px}
+
+  .project{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;padding:36px 0;border-top:1px solid var(--line)}
+  .project:first-of-type{border-top:0;padding-top:0}
+  .project h3{font-size:1.4rem;font-weight:700;margin-bottom:4px}
+  .project .meta{color:var(--ink-soft);font-size:.95rem;margin-bottom:14px}
+  .project p{margin:0 0 14px}
+  .project .tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0;list-style:none}
+  .project .tags li{font-size:.82rem;padding:3px 10px;border:1px solid var(--line);border-radius:4px;color:var(--ink-soft);background:var(--chalk)}
+  .project .actions a{margin-right:18px;font-weight:500}
+  figure{margin:0;background:var(--chalk);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figure .missing{display:none;aspect-ratio:16/10;align-items:center;justify-content:center;text-align:center;color:var(--ink-soft);font-size:.9rem;padding:20px;background:repeating-linear-gradient(45deg,#f7f9f6 0 12px,#eef2ec 12px 24px)}
+  figure.no-img img{display:none}
+  figure.no-img .missing{display:flex}
+  figcaption{font-size:.85rem;color:var(--ink-soft);padding:8px 12px;border-top:1px solid var(--line)}
+  @media (max-width:820px){.project{grid-template-columns:1fr;gap:20px} .project figure{order:-1}}
+
+  .timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--pitch);margin-left:8px}
+  .timeline>li{position:relative;padding:0 0 36px 28px}
+  .timeline>li:last-child{padding-bottom:0}
+  .timeline>li::before{content:"";position:absolute;left:-8px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--pitch)}
+  .timeline h3{font-size:1.3rem;font-weight:700}
+  .timeline .where{color:var(--ink-soft);margin:2px 0 10px}
+  .timeline p{margin:0;max-width:70ch}
+
+  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px 40px}
+  .skills h3{font-size:1.05rem;font-weight:700;color:var(--pitch);margin-bottom:6px}
+  .skills p{margin:0;color:var(--ink-soft)}
+
+  .edu{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .edu h3{font-size:1.15rem;font-weight:700}
+  .edu p{margin:4px 0 0;color:var(--ink-soft)}
+  @media (max-width:700px){.edu{grid-template-columns:1fr}}
+
+  footer{padding:56px 0 40px}
+  footer h2{font-size:1.9rem;margin-bottom:10px}
+  footer p{color:var(--ink-soft);max-width:52ch;margin:0 0 20px}
+  footer .fine{font-size:.85rem;margin-top:40px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Seif Eddine Mejri</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#personal">Personal projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Seif Eddine Mejri</h1>
+      <div class="role">Data Scientist — Football Analytics</div>
+      <p>I build and validate models that combine event, tracking and video data to explain and forecast what happens on the pitch: phase-of-play detection, line-breaking passes, ball tracking from broadcast footage, player identification. Machine Learning Engineer at Driblab since 2023.</p>
+      <div class="links">
+        <a class="primary" href="Seif-Eddine-MEJRI-Resume.pdf" target="_blank">Download CV (PDF)</a>
+        <a href="https://github.com/SeifMejri21" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/seif-eddine-mejri-5436b5195/" target="_blank">LinkedIn</a>
+        <a href="mailto:mejriseifeddine21@gmail.com" target="_blank">Email</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <img src="assets/portrait.jpg" alt="Seif Eddine Mejri">
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <h2>Work at Driblab</h2>
+    <p class="lede">Models I built and validated as Machine Learning Engineer at Driblab (Nov 2023 – present), working on event, tracking and broadcast-video data. Code is proprietary; the descriptions and visuals below show the approach and results.</p>
+
+    <article class="project">
+      <div>
+        <h3>Broadcast-to-pitch homography</h3>
+        <div class="meta">Computer vision · Keras</div>
+        <p>A perspective-transformation system that maps broadcast footage to pitch coordinates. A convolutional autoencoder detects pitch landmarks and associates them with template keypoints; a second CNN detects visible pitch lines and acts as a quality-assurance check on each homography. I replaced classic RANSAC's inlier test with an IoU-based metric, giving faster and more accurate transformations.</p>
+        <ul class="tags"><li>Convolutional autoencoder</li><li>CNN</li><li>RANSAC</li><li>Keras</li><li>OpenCV</li></ul>
+      </div>
+      <figure>
+        <img src="assets/homography.gif" alt="Broadcast frame mapped onto a 2D pitch template" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/homography.gif</div>
+        <figcaption>Broadcast frame projected onto the pitch template.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Line-breaking pass detection</h3>
+        <div class="meta">Event + tracking data · Python</div>
+        <p>An algorithm that combines event data with proprietary tracking data to detect passes that break defensive lines, quantifying progression and passing-lane dynamics for each team and player.</p>
+        <ul class="tags"><li>Event Data</li><li>Tracking data</li><li>Spatial analysis</li></ul>
+      </div>
+      <figure>
+        <img src="assets/LBP.gif" alt="Pass breaking a defensive line, drawn over tracking data" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/LBP.gif</div>
+        <figcaption>A detected line-breaking pass over tracking data.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Phase-of-play detection</h3>
+        <div class="meta">Event + tracking data · Model validation</div>
+        <p>A hybrid tracking-and-event model that automatically labels possession and transition phases across a match, validated against manual annotation, giving analysts a consistent basis for tactical assessment.</p>
+        <ul class="tags"><li>Tracking data</li><li>Event data</li><li>Validation</li></ul>
+      </div>
+      <figure>
+        <img src="assets/phases_of_play.gif" alt="Match timeline coloured by phase of play" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/phases_of_play.gif</div>
+        <figcaption>Match segmented into possession and transition phases.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Ball detection in broadcast video</h3>
+        <div class="meta">Computer vision · YOLOv8</div>
+        <p>Fine-tuned YOLOv8 for ball detection with grid-based patch inference, so the small ball is detected at usable resolution instead of being lost in the full frame. Precision improved by 30% over the baseline.</p>
+        <ul class="tags"><li>YOLOv8</li><li>Patch inference</li><li>PyTorch</li></ul>
+      </div>
+      <figure>
+        <img src="assets/3d_ball.gif" alt="Ball detections drawn on a broadcast frame" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/3d_ball.gif</div>
+        <figcaption>Ball detection with grid-based patch inference.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Team colour extraction</h3>
+        <div class="meta">Computer vision · Keras, scikit-learn</div>
+        <p>A system that extracts each team's kit colours from video: YOLO detects players, an image autoencoder removes the background from each 100×50 px crop, and clustering on the remaining foreground pixels gives fine-grained team colours for downstream team assignment.</p>
+        <ul class="tags"><li>Autoencoder</li><li>YOLO</li><li>Clustering</li><li>Keras</li><li>scikit-learn</li></ul>
+      </div>
+      <figure>
+        <img src="assets/team-colours.jpg" alt="Player crops with background removed and extracted team colours" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/team-colours.jpg</div>
+        <figcaption>Player crops, foreground masks and extracted colours.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Player identification with graph neural networks</h3>
+        <div class="meta">Tracking data · PyTorch Geometric</div>
+        <p>A graph neural network that infers each player's identity from the spatial pattern of their teammates, improving consistency of multi-camera tracking when detections are lost or swapped.</p>
+        <ul class="tags"><li>GNN</li><li>PyTorch Geometric</li><li>Multi-camera tracking</li></ul>
+      </div>
+      <figure>
+        <img src="assets/player-id.gif" alt="Graph of player positions with inferred identities" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/player-id.gif</div>
+        <figcaption>Player graph with inferred identities.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Team tactical shape Match periods</h3>
+        <div class="meta">Tracking data · Python</div>
+        <p>Measures each team's shape from tracking data and how it changes between phases: in and out of possession, and during transitions, so analysts can compare a team's real structure with its nominal formation.</p>
+        <ul class="tags"><li>Tracking data</li><li>Tactical analysis</li></ul>
+      </div>
+      <figure>
+        <img src="assets/Imputed_Coordinates_in_Possession.jpg" alt="Average team shape drawn per phase of play" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/Imputed_Coordinates_in_Possession.jpg</div>
+        <figcaption>Team shape in by period</figcaption>
+      </figure>
+    </article>
+
+  </div>
+</section>
+
+<section id="personal">
+  <div class="wrap">
+    <h2>Personal projects</h2>
+    <p class="lede">Side projects with public code.</p>
+
+    <article class="project">
+      <div>
+        <h3>XG-Tun</h3>
+        <div class="meta">Expected-goals model for Tunisian football · 2025</div>
+        <p>An xG model built from video rather than an existing event feed. Inspired by StatsBomb's freeze-frame structure: extract the shot frame, detect players and assign teams, estimate shooting angle and distance, then compute the shot probability from spatial features.</p>
+        <ul class="tags"><li>Computer vision</li><li>YOLOv8</li><li>Spatial modeling</li></ul>
+        <div class="actions"><a href="https://github.com/SeifMejri21">Code on GitHub</a></div>
+      </div>
+      <figure>
+        <img src="assets/xg_tun.jpg" alt="Shot frame with player detection and xG estimate" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/xg_tun.jpg</div>
+        <figcaption>Shot frame with player detection, team assignment and xG estimate.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Sotudeh</h3>
+        <div class="meta">Football job intelligence dashboard · 2025</div>
+        <p>A Selenium scraper that collects football-club openings from LinkedIn worldwide, feeding an interactive Plotly Dash dashboard to explore roles by club, country and function.</p>
+        <ul class="tags"><li>Selenium</li><li>Plotly Dash</li></ul>
+        <div class="actions"><a href="https://sotudeh.onrender.com">Live demo</a></div>
+      </div>
+      <figure>
+        <img src="assets/sotudeh.png" alt="Sotudeh dashboard showing football job openings" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/sotudeh.png</div>
+        <figcaption>Dashboard view of open roles across clubs.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Rjab</h3>
+        <div class="meta">AI travel recommendation agent · Community project, 2025</div>
+        <p>A scraping pipeline covering 4,000+ points of interest and a Retrieval-Augmented Generation agent on the Mistral API, served through a Flask API.</p>
+        <ul class="tags"><li>RAG</li><li>Mistral API</li><li>Flask</li></ul>
+      </div>
+      <figure>
+        <img src="assets/rjab.png" alt="Rjab agent answering a travel query" onerror="this.parentNode.classList.add('no-img')">
+        <div class="missing">Add assets/rjab.png</div>
+        <figcaption>Example recommendation from the agent.</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <ol class="timeline">
+      <li>
+        <h3>Driblab</h3>
+        <div class="where">Machine Learning Engineer / Data Scientist, Football Analytics · Remote · Nov 2023 – present</div>
+        <p>Computer-vision, tracking and event-data models for tactical and physical analysis (see Work above). Also designed a multi-server distributed storage system for tracking datasets with an append-only changelog for full data lineage, and maintain model robustness through automated quality control and documented pipelines.</p>
+      </li>
+      <li>
+        <h3>Laevitas</h3>
+        <div class="where">Data Scientist / Team Lead · Tunis · Jan 2022 – Aug 2023</div>
+        <p>Led a cross-functional team of six engineers and analysts. Designed automated ETL pipelines, optimized SQL databases for high-volume analytics, and delivered dashboards (Tableau, Power BI) and APIs for reporting and data delivery.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div><h3>Football analytics</h3><p>Event data, tracking data, physical and performance metrics, tactical phase analysis, player identification, expected goals (xG) modeling</p></div>
+      <div><h3>Statistics and modeling</h3><p>Applied statistics, predictive and forecasting models, model validation and robustness, statistical modeling</p></div>
+      <div><h3>Machine learning</h3><p>Deep learning, computer vision, CNNs, Transformers, Graph Neural Networks</p></div>
+      <div><h3>Engineering</h3><p>Python, SQL, automated ETL pipelines, API development and integration, data modeling, documentation</p></div>
+      <div><h3>Tools</h3><p>PyTorch, PyTorch Geometric, Keras, scikit-learn, OpenCV, YOLOv8, Flask, Selenium, AWS, Linux, Plotly Dash, Tableau, Power BI</p></div>
+      <div><h3>Languages</h3><p>Arabic (native), English (fluent, C1), French (fluent)</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="edu">
+      <div>
+        <h3>Higher School of Statistics and Data Analysis of Tunis (ESSAI)</h3>
+        <p>National Engineering Degree in Statistics and Data Analysis, 2019 – 2022. Five-year selective engineering program; Master's-equivalent under the Bologna framework.</p>
+      </div>
+      <div>
+        <h3>Preparatory Institute for Engineering Studies of Tunis</h3>
+        <p>Preparatory degree in Mathematics and Physics, 2017 – 2019.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p>Open to data science and machine learning roles in football. Based in Manouba, Tunisia; working remotely.</p>
+    <div class="links">
+      <a class="primary" href="mailto:mejriseifeddine21@gmail.com">mejriseifeddine21@gmail.com</a>
+      <a href="https://www.linkedin.com/in/seif-eddine-mejri-5436b5195/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/SeifMejri21" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="fine">© 2026 Seif Eddine Mejri</p>
+  </div>
+</footer>
+
+</body>
+</html>
