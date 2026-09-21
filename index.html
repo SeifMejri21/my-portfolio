@@ -345,5 +345,38 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  if (sessionStorage.getItem("visit_notified")) return;
+  sessionStorage.setItem("visit_notified", "1");
+
+  var WEB3FORMS_KEY = "2df93a45-496c-4fd1-aba9-bee8701a3ca7";
+
+  function send(info) {
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: "Portfolio visit — " + [info.city, info.country].filter(Boolean).join(", "),
+        from_name: "Portfolio tracker",
+        message:
+          "Someone opened your portfolio.\n\n" +
+          "Time: " + new Date().toString() + "\n" +
+          "Location: " + [info.city, info.region, info.country].filter(Boolean).join(", ") + "\n" +
+          "Page: " + location.href + "\n" +
+          "Came from: " + (document.referrer || "direct / unknown") + "\n" +
+          "Device: " + navigator.userAgent
+      })
+    }).catch(function () {});
+  }
+
+  fetch("https://ipwho.is/")
+    .then(function (r) { return r.json(); })
+    .then(function (d) { send(d || {}); })
+    .catch(function () { send({}); });
+})();
+</script>
+
 </body>
 </html>
